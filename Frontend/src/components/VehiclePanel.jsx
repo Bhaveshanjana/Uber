@@ -2,7 +2,7 @@ import React from "react";
 
 const VehiclePanel = (props) => {
   return (
-    <div>
+    <div className="space-y-2">
       <h3
         onClick={() => {
           props.setvehiclepanel(false);

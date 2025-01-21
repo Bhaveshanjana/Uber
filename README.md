@@ -7,10 +7,11 @@ This repository contains the codebase for an Uber application built using the ME
 ## Current Progress
 - **Project Setup**:
   - MERN stack initialization.
-- **User and Captain authentication**:
-  - Signup, login, and logout functionality.
-- **User & Captain Interfaces**:
-  - User-friendly mobile design only for both User and Captain.
+  
+- **User Interface Completed**:
+
+- **Mobile-Friendly Design**:
+  - User-friendly mobile design only for User .
   - Seamless navigation between interfaces.
 - **Location & Vehicle Selection**:
   - Users can select their location "hard coded value for now".

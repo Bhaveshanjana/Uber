@@ -4,18 +4,28 @@ import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
 import LocationSearchPanel from "../components/LocationSearchPanel";
 import VehiclePanel from "../components/VehiclePanel";
-import ConfirmedVehicle from "../components/ConfirmedRide";
+import ConfirmedRide from "../components/ConfirmedRide";
+import LookingForDriver from "../components/LookingForDriver";
+import WaitingForDriver from '../components/WaitingForDriver.jsx'
 
 const LandingPage = () => {
   const [pick, setPick] = useState("");
   const [destination, setDestination] = useState("");
+
   const [panelOpen, setpanelOpen] = useState(false);
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
+
   const [vehiclepanel, setvehiclepanel] = useState(false);
   const [confirmVehiclePanel, setConfirmVehiclePanel] = useState(false);
   const vehiclepanelRef = useRef(null);
   const confirmVehiclePanelRef = useRef(null);
+
+  const [vehicleFound, setVehicleFound] = useState(false);
+  const vehicleFoundRef =useRef(null);
+
+  const [waitingForDriver, setWaitingForDriver] = useState(false);
+  const waitingForDriverRef = useRef(null);
   const submitHandler = (e) => {
     e.preventDefault();
   };
@@ -70,6 +80,34 @@ const LandingPage = () => {
       }
     },
     [confirmVehiclePanel]
+  );
+  useGSAP(
+    function () {
+      if (vehicleFound) {
+        gsap.to(vehicleFoundRef.current, {
+          transform: "translateY(0)",
+        });
+      } else {
+        gsap.to(vehicleFoundRef.current, {
+          transform: "translateY(100%)",
+        });
+      }
+    },
+    [vehicleFound]
+  );
+  useGSAP(
+    function () {
+      if (waitingForDriver) {
+        gsap.to(waitingForDriverRef.current, {
+          transform: "translateY(0)",
+        });
+      } else {
+        gsap.to(waitingForDriverRef.current, {
+          transform: "translateY(100%)",
+        });
+      }
+    },
+    [waitingForDriver]
   );
   return (
     <div className="relative h-screen overflow-hidden">
@@ -150,7 +188,19 @@ const LandingPage = () => {
         ref={confirmVehiclePanelRef}
         className="fixed w-full translate-y-full z-10 bottom-0 space-y-4 bg-white p-2 pb-8"
       >
-        <ConfirmedVehicle />
+        <ConfirmedRide setConfirmVehiclePanel={setConfirmVehiclePanel} setVehicleFound={setVehicleFound}/>
+      </div>
+      <div
+        ref={vehicleFoundRef}
+        className="fixed w-full translate-y-full z-10 bottom-0 space-y-4 bg-white p-2 pb-8"
+      >
+        <LookingForDriver  setVehicleFound={setVehicleFound} setWaitingForDriver={setWaitingForDriver} />
+      </div>
+      <div
+      ref={waitingForDriverRef}
+        className="fixed w-full translate-y-full z-10 bottom-0 space-y-4 bg-white p-2 pb-8"
+      >
+        <WaitingForDriver setWaitingForDriver={setWaitingForDriver}/>
       </div>
     </div>
   );
