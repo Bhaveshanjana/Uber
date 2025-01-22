@@ -8,7 +8,7 @@ This repository contains the codebase for an Uber application built using the ME
 - **Project Setup**:
   - MERN stack initialization.
   
-- **User Interface Completed**:
+- **User Interface Completed**
 
 - **Mobile-Friendly Design**:
   - User-friendly mobile design only for User .
@@ -16,6 +16,8 @@ This repository contains the codebase for an Uber application built using the ME
 - **Location & Vehicle Selection**:
   - Users can select their location "hard coded value for now".
   - Users can choose their desired vehicle.
+
+- **Working on Captain Ui**
 
 ## Folder Structure
 - `Frontend`: Built using React.js for a modern and dynamic user experience.
