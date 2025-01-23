@@ -1,10 +1,19 @@
-import React, { useRef, useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const RidePopUp = (props) => {
+const FinishRide = (props) => {
   return (
-    <div>
-      <h2 className="text-2xl font-semibold py-2">Available rides!</h2>
-      <div className="flex justify-between items-center px-2 py-4 bg-yellow-300/60 rounded-md">
+    <div className="space-y-3">
+      <h3
+        onClick={() => {
+          props.setFinishRide(false);
+        }}
+        className=" text-center ml-4 w-[92%] bg-gray-100 rounded-lg"
+      >
+        <i className="ri-arrow-down-wide-fill text-3xl "></i>
+      </h3>
+      <h1 className="text-2xl font-normal  text-center">Finish this Ride</h1>
+      <div className="flex justify-between items-center px-2 py-4 bg-yellow-300/60 rounded-md ">
         <div className="flex items-center gap-2">
           <img
             className="w-16 h-16 rounded-full object-cover"
@@ -15,9 +24,10 @@ const RidePopUp = (props) => {
         </div>
         <h3 className="text-gray-600 text-lg font-medium">1.1km</h3>
       </div>
-      <div className="flex items-center justify-between gap-4 flex-col px-4 mt-4">
-        <div className="w-full space-y-6">
-          <div className="flex items-center gap-6 border-b-2 ">
+      <div className="flex items-center justify-between gap-4 flex-col px-1 pt-3">
+        <div className="w-full bg-gray-100 rounded-md px-2 shadow-lg">
+          <h2 className="text-2xl underline my-1">Pick up</h2>
+          <div className="flex items-center gap-6 border-b-2 py-2 ">
             <i className="ri-map-pin-range-line text-xl"></i>
             <div>
               <h1 className="text-xl font-semibold ">1-C-80,</h1>
@@ -27,7 +37,8 @@ const RidePopUp = (props) => {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-6 border-b-2">
+          <h2 className="text-2xl underline mt-2">Drop location</h2>
+          <div className="flex items-center gap-6 border-b-2 py-2">
             <i className="ri-map-pin-time-fill text-xl"></i>
             <div>
               <h1 className="text-xl font-semibold ">1-C-80,</h1>
@@ -37,7 +48,8 @@ const RidePopUp = (props) => {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-6 border-b-2">
+          <h1 className="text-2xl mt-2">Total Amount-</h1>
+          <div className="flex items-center gap-6 py-2 ">
             <i className="ri-bank-card-fill text-xl"></i>
             <div>
               <h1 className="text-xl font-semibold ">$190</h1>
@@ -45,27 +57,17 @@ const RidePopUp = (props) => {
             </div>
           </div>
         </div>
-        <div className="flex w-full flex-col gap-2 text-xl">
-          <button
-            onClick={() => {
-              props.setAcceptRide(true);
-            }}
-            className=" bg-green-500 text-white p-1 rounded-md "
+        <div className="w-full gap-3 text-xl ">
+          <Link
+            to="/captain-home"
+            className="flex justify-center bg-green-500 text-white p-2 rounded-md"
           >
-            Confirm
-          </button>
-          <button
-            onClick={() => {
-              props.setRidePopUp(false);
-            }}
-            className=" bg-red-600 text-white p-1 rounded-md"
-          >
-            Ignore
-          </button>
+            Finish ride
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default RidePopUp;
+export default FinishRide;

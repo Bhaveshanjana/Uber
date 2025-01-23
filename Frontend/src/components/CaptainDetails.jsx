@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const CaptainDetails = () => {
   return (
@@ -37,7 +37,7 @@ const CaptainDetails = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CaptainDetails
+export default CaptainDetails;
