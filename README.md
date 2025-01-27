@@ -26,7 +26,8 @@
 - **Frontend Development**:  
   - Basic interfaces built for users and captains.  
 - **Backend Development**:  
-  - APIs designed and database integration in progress.  
+  - Google maps API's integrated. 
+  - Ui and backend integration in progress. 
 
 ## 🗂️ Folder Structure  
 - **Frontend**: Built using React.js for a dynamic and modern user experience.  
