@@ -9,7 +9,7 @@
   - User-friendly mobile-first interface.  
   - Smooth navigation between pages and actions.  
 - **Location & Vehicle Selection**  
-  - Users can select their location (currently hardcoded).  
+  - Users can select their location *(current location suggestion are hardcoded)*.  
   - Option to choose a desired vehicle.  
 
 ### Captain Features  
