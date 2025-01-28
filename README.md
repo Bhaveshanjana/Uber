@@ -27,7 +27,8 @@
   - Basic interfaces built for users and captains.  
 - **Backend Development**:  
   - Google maps API's integrated. 
-  - Ui and backend integration in progress. 
+  - User backend intergrated with Ui. 
+  - captain Ui and backend integration in progress. 
 
 ## 🗂️ Folder Structure  
 - **Frontend**: Built using React.js for a dynamic and modern user experience.  

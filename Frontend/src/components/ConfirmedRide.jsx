@@ -22,27 +22,27 @@ const ConfirmedVehicle = (props) => {
           <div className="flex items-center gap-6 border-b-2 ">
             <i className="ri-map-pin-range-line text-xl"></i>
             <div>
-              <h1 className="text-xl font-semibold ">1-C-80,</h1>
+              
               <p className="text-lg text-gray-600">
-                {" "}
-                housing board, segwa, chittoragrh
+                
+                {props.pickup}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-6 border-b-2">
             <i className="ri-map-pin-time-fill text-xl"></i>
             <div>
-              <h1 className="text-xl font-semibold ">1-C-80,</h1>
+              
               <p className="text-lg text-gray-600">
-                {" "}
-                housing board, segwa, chittoragrh
+                
+                {props.destination}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-6">
             <i className="ri-bank-card-fill text-xl"></i>
             <div>
-              <h1 className="text-xl font-semibold ">$190</h1>
+              <h1 className="text-xl font-semibold ">₹ {props.fare[props.vehicleType]}</h1>
               <p className="text-lg text-gray-600"> Cash</p>
             </div>
           </div>
@@ -51,6 +51,7 @@ const ConfirmedVehicle = (props) => {
           onClick={() => {
             props.setVehicleFound(true);
             props.setConfirmVehiclePanel(false);
+            props.createRide();
           }}
           className="text-xl bg-gray-500 text-white w-full p-1 rounded-md "
         >

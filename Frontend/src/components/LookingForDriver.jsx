@@ -18,31 +18,29 @@ const LookingForDriver = (props) => {
           src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_956,h_638/v1596627972/assets/e7/e861a8-30ec-4d57-8045-7186f6c5ec35/original/comfort.png"
           alt=""
         />
-        <div className="w-full space-y-6">
+        <div className="w-full space-y-3">
           <div className="flex items-center gap-6 border-b-2 ">
             <i className="ri-map-pin-range-line text-xl"></i>
             <div>
-              <h1 className="text-2xl font-semibold ">1-C-80,</h1>
+             
               <p className="text-lg text-gray-600">
-                {" "}
-                housing board, segwa, chittoragrh
+               {props.pickup}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-6 border-b-2">
             <i className="ri-map-pin-time-fill text-xl"></i>
             <div>
-              <h1 className="text-2xl font-semibold ">1-C-80,</h1>
+              
               <p className="text-lg text-gray-600">
-                {" "}
-                housing board, segwa, chittoragrh
+               {props.destination}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-6 pb-4">
+          <div className="flex items-center gap-6 border-b-2">
             <i className="ri-bank-card-fill text-xl"></i>
             <div>
-              <h1 className="text-2xl font-semibold ">$190</h1>
+              <h1 className="text-xl font-semibold ">₹ {props.fare[props.vehicleType]}</h1>
               <p className="text-lg text-gray-600"> Cash</p>
             </div>
           </div>
@@ -52,7 +50,7 @@ const LookingForDriver = (props) => {
             props.setVehicleFound(false);
           props.setWaitingForDriver(true);
         }}
-      className="bg-yellow-100 w-full text-2xl rounded-md">ok</button>
+      className="bg-yellow-100 w-full text-2xl rounded-md mt-4">ok</button>
     </div>
   );
 };
