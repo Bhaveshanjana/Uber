@@ -51,11 +51,11 @@ const captainSchema = new mongoose.Schema({
         enum:['active', 'inactive'],
         default: 'inactive'
     }, 
-    soketid:{
+    socketId:{
         type: String,
     },
     location:{
-        lat:{
+        ltd:{
             type: Number,
         },
         lng:{

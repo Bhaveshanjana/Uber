@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -8,6 +8,8 @@ import VehiclePanel from "../components/VehiclePanel";
 import ConfirmedRide from "../components/ConfirmedRide";
 import LookingForDriver from "../components/LookingForDriver";
 import WaitingForDriver from "../components/WaitingForDriver.jsx";
+import { SocketContext } from "../context/socketContext.jsx";
+import { UserDataContext } from "../context/UserContext.jsx";
 
 const LandingPage = () => {
   const [pickup, setPickup] = useState("");
@@ -34,6 +36,13 @@ const LandingPage = () => {
 
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
+
+  const { socket } = useContext(SocketContext);
+  const { user } = useContext(UserDataContext);
+
+  useEffect(() => {
+    socket.emit("join", { userType: "user", userId: user._id });
+  }, [user]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -189,16 +198,17 @@ const LandingPage = () => {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/rides/create`,
         {
-          params: {
-            pickup,
-            destination,
-            vehicleType,
-          },
-          header: {
+          pickup,
+          destination,
+          vehicleType,
+        },
+        {
+          headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
       throw error;
