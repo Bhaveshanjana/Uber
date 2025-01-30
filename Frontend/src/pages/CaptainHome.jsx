@@ -9,8 +9,10 @@ import { CaptainDataContext } from "../context/CaptainConetxt";
 import { SocketContext } from "../context/socketContext";
 
 const CaptainHome = () => {
-  const [ridePopUp, setRidePopUp] = useState(true);
+  const [ridePopUp, setRidePopUp] = useState(false);
   const ridePopUpPanelRef = useRef(null);
+
+  const [ride, setRide] = useState(null);
 
   const [acceptRide, setAcceptRide] = useState(false);
   const AcceptRideRef = useRef(null);
@@ -40,6 +42,13 @@ const CaptainHome = () => {
     const locationInterval = setInterval(updateLocation, 10000);
     // return () => clearInterval(locationInterval);
   });
+
+  socket.on('new-ride',(data) => {
+    console.log(data);
+    setRide(data);
+    setRidePopUp(true);
+    
+  })
 
   useGSAP(
     function () {
@@ -99,13 +108,17 @@ const CaptainHome = () => {
         ref={ridePopUpPanelRef}
         className="fixed w-full translate-y-full z-10 bottom-0 space-y-4 bg-white p-2 pb-8"
       >
-        <RidePopUp setRidePopUp={setRidePopUp} setAcceptRide={setAcceptRide} />
+        <RidePopUp 
+        ride={ride}
+        setRidePopUp={setRidePopUp} setAcceptRide={setAcceptRide} />
       </div>
       <div
         ref={AcceptRideRef}
         className="fixed w-full h-screen translate-y-full z-10 bottom-0 space-y-4 bg-white p-2 pb-8"
       >
-        <AcceptRide setAcceptRide={setAcceptRide} />
+        <AcceptRide 
+        confirmRide={confirmRide}
+        setAcceptRide={setAcceptRide} />
       </div>
     </div>
   );

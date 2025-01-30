@@ -11,7 +11,7 @@ const RidePopUp = (props) => {
             src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
             alt=""
           />
-          <h3 className="text-xl font-medium">Yash</h3>
+          <h3 className="text-xl font-medium">{props.ride?.user.fullname.firstname + " "+ props.ride?.user.fullname.lastname}</h3>
         </div>
         <h3 className="text-gray-600 text-lg font-medium">1.1km</h3>
       </div>
@@ -20,27 +20,27 @@ const RidePopUp = (props) => {
           <div className="flex items-center gap-6 border-b-2 ">
             <i className="ri-map-pin-range-line text-xl"></i>
             <div>
-              <h1 className="text-xl font-semibold ">1-C-80,</h1>
+              
               <p className="text-lg text-gray-600">
                 {" "}
-                housing board, segwa, chittoragrh
+                {props.ride?.pickup}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-6 border-b-2">
             <i className="ri-map-pin-time-fill text-xl"></i>
             <div>
-              <h1 className="text-xl font-semibold ">1-C-80,</h1>
+              
               <p className="text-lg text-gray-600">
                 {" "}
-                housing board, segwa, chittoragrh
+                {props.ride?.destination}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-6 border-b-2">
             <i className="ri-bank-card-fill text-xl"></i>
             <div>
-              <h1 className="text-xl font-semibold ">$190</h1>
+              <h1 className="text-xl font-semibold ">${props.ride?.fare}</h1>
               <p className="text-lg text-gray-600"> Cash</p>
             </div>
           </div>

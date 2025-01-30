@@ -12,6 +12,7 @@ const AcceptRide = (props) => {
         <i
           onClick={() => {
             props.setAcceptRide(false);
+            confirmRide();
           }}
           className="ri-arrow-down-wide-fill text-3xl "
         ></i>
