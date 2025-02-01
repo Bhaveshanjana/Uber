@@ -1,6 +1,7 @@
 const rideModel = require("../models/ride.model");
+const captain = require("../models/captain.model");
 const mapService = require("../services/maps.service");
-const crypto = require('crypto')
+const crypto = require("crypto");
 
 async function getFare(pickup, destination) {
   if (!pickup || !destination) {
@@ -50,9 +51,11 @@ async function getFare(pickup, destination) {
 
 module.exports.getFare = getFare;
 
-function getOtp(num){
-  function genrateOtp(num){
-    const otp = crypto.randomInt(Math.pow(10, num -1), Math.pow(10, num)).toString();
+function getOtp(num) {
+  function genrateOtp(num) {
+    const otp = crypto
+      .randomInt(Math.pow(10, num - 1), Math.pow(10, num))
+      .toString();
     return otp;
   }
   return genrateOtp(num);
@@ -77,5 +80,34 @@ module.exports.createRide = async ({
     otp: getOtp(4),
     fare: fare[vehicleType],
   });
+  return ride;
+};
+
+module.exports.confirmRide = async ({ rideId, captain }) => {
+  if (!rideId) {
+    throw new Error("Ride ID is required");
+  }
+
+  await rideModel.findOneAndUpdate(
+    {
+      _id: rideId,
+    },
+    {
+      status: "accepted",
+      captain: captain._id,
+    }
+  );
+
+  const ride = await rideModel
+    .findOne({
+      _id: rideId,
+    })
+    .populate("user")
+    .populate("captain");
+
+  if (!ride) {
+    throw new Error("Ride not found");
+  }
+
   return ride;
 };

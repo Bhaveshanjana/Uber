@@ -7,6 +7,7 @@ import gsap from "gsap";
 import AcceptRide from "../components/AcceptRide";
 import { CaptainDataContext } from "../context/CaptainConetxt";
 import { SocketContext } from "../context/socketContext";
+import axios from "axios";
 
 const CaptainHome = () => {
   const [ridePopUp, setRidePopUp] = useState(false);
@@ -39,16 +40,36 @@ const CaptainHome = () => {
         });
       }
     };
-    const locationInterval = setInterval(updateLocation, 10000);
+    // const locationInterval = setInterval(updateLocation, 10000);
     // return () => clearInterval(locationInterval);
   });
 
-  socket.on('new-ride',(data) => {
-    console.log(data);
+  socket.on("new-ride", (data) => {
     setRide(data);
     setRidePopUp(true);
-    
-  })
+  });
+
+  async function confirmRide() {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/rides/confirm`,
+        {
+          rideId: ride._id,
+          captainId: captain._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("captain-token")}`,
+          },
+        }
+      );
+      setRidePopUp(false);
+      setAcceptRide(true);
+    } catch (error) {
+      console.log(error);
+      throw new Error(error.message);
+    }
+  }
 
   useGSAP(
     function () {
@@ -108,17 +129,18 @@ const CaptainHome = () => {
         ref={ridePopUpPanelRef}
         className="fixed w-full translate-y-full z-10 bottom-0 space-y-4 bg-white p-2 pb-8"
       >
-        <RidePopUp 
-        ride={ride}
-        setRidePopUp={setRidePopUp} setAcceptRide={setAcceptRide} />
+        <RidePopUp
+          ride={ride}
+          confirmRide={confirmRide}
+          setRidePopUp={setRidePopUp}
+          setAcceptRide={setAcceptRide}
+        />
       </div>
       <div
         ref={AcceptRideRef}
         className="fixed w-full h-screen translate-y-full z-10 bottom-0 space-y-4 bg-white p-2 pb-8"
       >
-        <AcceptRide 
-        confirmRide={confirmRide}
-        setAcceptRide={setAcceptRide} />
+        <AcceptRide setAcceptRide={setAcceptRide} />
       </div>
     </div>
   );

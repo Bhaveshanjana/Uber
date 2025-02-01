@@ -36,4 +36,10 @@ router.get(
   rideController.getFare
 );
 
+router.post(
+  "/confirm",
+  authMiddleware.authCaptain,
+  body("rideId").isMongoId().withMessage("Invaild ride Id"),
+  rideController.confirmRide
+);
 module.exports = router;

@@ -28,7 +28,9 @@
 - **Backend Development**:  
   - Google maps API's integrated. 
   - User backend intergrated with Ui. 
-  - captain Ui and backend integration in progress. 
+  - captain Ui and backend integrated. 
+  - Now captain Notify when any user generate new ride. 
+  - Working on get direction on maps when captain start ride. 
 
 ## 🗂️ Folder Structure  
 - **Frontend**: Built using React.js for a dynamic and modern user experience.  

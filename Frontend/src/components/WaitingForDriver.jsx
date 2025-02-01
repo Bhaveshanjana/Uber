@@ -18,9 +18,13 @@ const WaitingForDriver = (props) => {
           alt=""
         />
         <div className="text-end">
-          <h2 className="uppercase text-gray-500 text-lg ">Yash</h2>
-          <h4 className="text-2xl font-semibold">Rj 09 uc 2002</h4>
-          <p className=" text-gray-500 text-lg">Platina</p>
+          <h2 className=" text-gray-500 text-lg capitalize">
+            {props.ride?.captain.fullname.firstname}
+          </h2>
+          <h4 className="text-2xl font-semibold">
+            {props.ride?.captain.vehicle.plate}
+          </h4>
+          <p className=" text-gray-500 text-lg">vehicle as you select</p>
         </div>
       </div>
       <div className="flex items-center justify-between gap-4 flex-col px-4 pt-4">
@@ -28,27 +32,24 @@ const WaitingForDriver = (props) => {
           <div className="flex items-center gap-6 border-b-2 ">
             <i className="ri-map-pin-range-line text-xl"></i>
             <div>
-              <h1 className="text-2xl font-semibold ">1-C-80,</h1>
-              <p className="text-lg text-gray-600">
-                {" "}
-                housing board, segwa, chittoragrh
-              </p>
+              <p className="text-lg text-gray-600"> {props.ride?.pickup}</p>
             </div>
           </div>
           <div className="flex items-center gap-6 border-b-2">
             <i className="ri-map-pin-time-fill text-xl"></i>
             <div>
-              <h1 className="text-2xl font-semibold ">1-C-80,</h1>
               <p className="text-lg text-gray-600">
                 {" "}
-                housing board, segwa, chittoragrh
+                {props.ride?.destination}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-6">
             <i className="ri-bank-card-fill text-xl"></i>
             <div>
-              <h1 className="text-2xl font-semibold ">$190</h1>
+              <h1 className="text-2xl font-semibold ">
+                ${props.fare[props.vehicleType]}
+              </h1>
               <p className="text-lg text-gray-600"> Cash</p>
             </div>
           </div>

@@ -37,12 +37,20 @@ const LandingPage = () => {
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
 
+  const [ride, setRide] = useState(null);
+
   const { socket } = useContext(SocketContext);
   const { user } = useContext(UserDataContext);
 
   useEffect(() => {
     socket.emit("join", { userType: "user", userId: user._id });
   }, [user]);
+
+  socket.on("ride-confirmed", (ride) => {
+    setVehicleFound(false);
+    setWaitingForDriver(true);
+    setRide(ride);
+  });
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -323,6 +331,7 @@ const LandingPage = () => {
       >
         <LookingForDriver
           pickup={pickup}
+          createRide={createRide}
           destination={destination}
           fare={fare}
           vehicleType={vehicleType}
@@ -334,7 +343,14 @@ const LandingPage = () => {
         ref={waitingForDriverRef}
         className="fixed w-full translate-y-full z-10 bottom-0 space-y-4 bg-white p-2 pb-8"
       >
-        <WaitingForDriver setWaitingForDriver={setWaitingForDriver} />
+        <WaitingForDriver
+          pickup={pickup}
+          ride={ride}
+          destination={destination}
+          fare={fare}
+          vehicleType={vehicleType}
+          setWaitingForDriver={setWaitingForDriver}
+        />
       </div>
     </div>
   );
