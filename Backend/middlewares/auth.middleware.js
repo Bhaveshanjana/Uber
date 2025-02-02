@@ -34,12 +34,12 @@ module.exports.authCaptain = async (req, res, next) => {
     const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
 
     if(!token){
-         return res.status(401).json({message: 'Unauthorized user'})
+         return res.status(401).json({message: 'Unauthorized captain'})
     }
 
     const isBlacklisted = await blacklistTokenModel.findOne({ token:token });
     if(isBlacklisted){
-        return res.status(401).json({message: 'unauthorized user'})
+        return res.status(401).json({message: 'unauthorized captain'})
     }
 
     try {
@@ -51,7 +51,7 @@ module.exports.authCaptain = async (req, res, next) => {
         return next();
         
     } catch (error) {
-         res.status(400).json({message: "Unauthorized user"})
+         res.status(400).json({message: "Unauthorized captain"})
     }
 }
 

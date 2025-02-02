@@ -25,6 +25,7 @@ const WaitingForDriver = (props) => {
             {props.ride?.captain.vehicle.plate}
           </h4>
           <p className=" text-gray-500 text-lg">vehicle as you select</p>
+          <h1 className="text-lg font-semibold">{props.ride?.otp}</h1>
         </div>
       </div>
       <div className="flex items-center justify-between gap-4 flex-col px-4 pt-4">

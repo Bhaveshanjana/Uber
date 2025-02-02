@@ -41,7 +41,7 @@ const CaptainHome = () => {
       }
     };
     // const locationInterval = setInterval(updateLocation, 10000);
-    // return () => clearInterval(locationInterval);
+    // updateLocation()
   });
 
   socket.on("new-ride", (data) => {
@@ -140,7 +140,10 @@ const CaptainHome = () => {
         ref={AcceptRideRef}
         className="fixed w-full h-screen translate-y-full z-10 bottom-0 space-y-4 bg-white p-2 pb-8"
       >
-        <AcceptRide setAcceptRide={setAcceptRide} />
+        <AcceptRide
+        ride={ride}
+        setRidePopUp={setRidePopUp}
+         setAcceptRide={setAcceptRide} />
       </div>
     </div>
   );

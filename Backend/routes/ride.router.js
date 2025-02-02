@@ -42,4 +42,15 @@ router.post(
   body("rideId").isMongoId().withMessage("Invaild ride Id"),
   rideController.confirmRide
 );
+
+router.get(
+  "/start-ride",
+  // authMiddleware.authCaptain,
+  query("rideId").isMongoId().withMessage("Invaild ride Id"),
+  query("otp")
+    .isString()
+    .isLength({ min: 4, max: 4 })
+    .withMessage("Invaild otp"),
+  rideController.startRide
+);
 module.exports = router;

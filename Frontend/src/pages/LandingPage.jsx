@@ -10,6 +10,7 @@ import LookingForDriver from "../components/LookingForDriver";
 import WaitingForDriver from "../components/WaitingForDriver.jsx";
 import { SocketContext } from "../context/socketContext.jsx";
 import { UserDataContext } from "../context/UserContext.jsx";
+import {useNavigate} from 'react-router-dom'
 
 const LandingPage = () => {
   const [pickup, setPickup] = useState("");
@@ -38,6 +39,7 @@ const LandingPage = () => {
   const [vehicleType, setVehicleType] = useState(null);
 
   const [ride, setRide] = useState(null);
+  const navigate = useNavigate();
 
   const { socket } = useContext(SocketContext);
   const { user } = useContext(UserDataContext);
@@ -46,11 +48,18 @@ const LandingPage = () => {
     socket.emit("join", { userType: "user", userId: user._id });
   }, [user]);
 
-  socket.on("ride-confirmed", (ride) => {
+  socket.on("ride-confirmed", ride => {
     setVehicleFound(false);
     setWaitingForDriver(true);
     setRide(ride);
   });
+
+  socket.on('ride-started', ride =>{
+    console.log("ride");
+    
+    setWaitingForDriver(false);
+    navigate('/riding')
+  })
 
   const submitHandler = (e) => {
     e.preventDefault();
