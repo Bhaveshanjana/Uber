@@ -8,6 +8,7 @@ import AcceptRide from "../components/AcceptRide";
 import { CaptainDataContext } from "../context/CaptainConetxt";
 import { SocketContext } from "../context/socketContext";
 import axios from "axios";
+import LiveTracking from "../components/LiveTraking";
 
 const CaptainHome = () => {
   const [ridePopUp, setRidePopUp] = useState(false);
@@ -40,9 +41,9 @@ const CaptainHome = () => {
         });
       }
     };
-    // const locationInterval = setInterval(updateLocation, 10000);
-    // updateLocation()
-  });
+    const locationInterval = setInterval(updateLocation, 10000);
+    updateLocation();
+  }, []);
 
   socket.on("new-ride", (data) => {
     setRide(data);
@@ -115,12 +116,8 @@ const CaptainHome = () => {
           <i className="ri-logout-box-r-line"></i>
         </Link>
       </div>
-      <div className="h-3/5">
-        <img
-          className="h-full w-full object-cover"
-          src="https://s.wsj.net/public/resources/images/BN-XR452_201802_M_20180228165525.gif"
-          alt=""
-        />
+      <div className="h-3/5 w-full object-cover">
+        <LiveTracking />
       </div>
       <div>
         <CaptainDetails />
@@ -141,9 +138,10 @@ const CaptainHome = () => {
         className="fixed w-full h-screen translate-y-full z-10 bottom-0 space-y-4 bg-white p-2 pb-8"
       >
         <AcceptRide
-        ride={ride}
-        setRidePopUp={setRidePopUp}
-         setAcceptRide={setAcceptRide} />
+          ride={ride}
+          setRidePopUp={setRidePopUp}
+          setAcceptRide={setAcceptRide}
+        />
       </div>
     </div>
   );

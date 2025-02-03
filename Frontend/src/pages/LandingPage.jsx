@@ -10,7 +10,8 @@ import LookingForDriver from "../components/LookingForDriver";
 import WaitingForDriver from "../components/WaitingForDriver.jsx";
 import { SocketContext } from "../context/socketContext.jsx";
 import { UserDataContext } from "../context/UserContext.jsx";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import LiveTracking from "../components/LiveTraking.jsx";
 
 const LandingPage = () => {
   const [pickup, setPickup] = useState("");
@@ -48,18 +49,17 @@ const LandingPage = () => {
     socket.emit("join", { userType: "user", userId: user._id });
   }, [user]);
 
-  socket.on("ride-confirmed", ride => {
+  socket.on("ride-confirmed", (ride) => {
     setVehicleFound(false);
     setWaitingForDriver(true);
     setRide(ride);
   });
 
-  socket.on('ride-started', ride =>{
-    console.log("ride");
-    
+  socket.on("ride-started", (ride) => {
     setWaitingForDriver(false);
-    navigate('/riding')
-  })
+    navigate("/riding");
+    navigate("/riding", { state: { ride } });
+  });
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -238,12 +238,8 @@ const LandingPage = () => {
         src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
         alt=""
       />
-      <div>
-        <img
-          className="h-screen w-screen object-cover"
-          src="https://st5.depositphotos.com/15409960/67014/v/450/depositphotos_670145438-stock-illustration-abstract-map-background-colorful-abstract.jpg"
-          alt="map"
-        />
+      <div className="h-screen w-screen object-cover">
+        <LiveTracking />
       </div>
       <div className="h-screen flex flex-col justify-end top-0 w-full absolute">
         <div className="  h-[30%] bg-white p-4 relative">

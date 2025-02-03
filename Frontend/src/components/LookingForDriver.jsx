@@ -5,7 +5,7 @@ const LookingForDriver = (props) => {
     <div>
       <h3
         onClick={() => {
-          props.setVehicleFound(false)
+          props.setVehicleFound(false);
         }}
         className=" text-center ml-4 w-[92%] bg-gray-100 rounded-lg"
       >
@@ -22,35 +22,35 @@ const LookingForDriver = (props) => {
           <div className="flex items-center gap-6 border-b-2 ">
             <i className="ri-map-pin-range-line text-xl"></i>
             <div>
-             
-              <p className="text-lg text-gray-600">
-               {props.pickup}
-              </p>
+              <p className="text-lg text-gray-600">{props.pickup}</p>
             </div>
           </div>
           <div className="flex items-center gap-6 border-b-2">
             <i className="ri-map-pin-time-fill text-xl"></i>
             <div>
-              
-              <p className="text-lg text-gray-600">
-               {props.destination}
-              </p>
+              <p className="text-lg text-gray-600">{props.destination}</p>
             </div>
           </div>
           <div className="flex items-center gap-6 border-b-2">
             <i className="ri-bank-card-fill text-xl"></i>
             <div>
-              <h1 className="text-xl font-semibold ">₹ {props.fare[props.vehicleType]}</h1>
+              <h1 className="text-xl font-semibold ">
+                ₹ {props.fare[props.vehicleType]}
+              </h1>
               <p className="text-lg text-gray-600"> Cash</p>
             </div>
           </div>
         </div>
       </div>
-      <button onClick={() => {
-            props.setVehicleFound(false);
+      <button
+        onClick={() => {
+          props.setVehicleFound(false);
           props.setWaitingForDriver(true);
         }}
-      className="bg-yellow-100 w-full text-2xl rounded-md mt-4">ok</button>
+        className="bg-yellow-100 w-full text-2xl rounded-md mt-4"
+      >
+        ok
+      </button>
     </div>
   );
 };

@@ -1,27 +1,29 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 const AcceptRide = (props) => {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
-  const submitHandler = async(e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
-    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/start-ride`,{
-      params:{rideId: props.ride._id,
-      otp: otp}
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("captain-token")}`,
+    const response = await axios.get(
+      `${import.meta.env.VITE_BASE_URL}/rides/start-ride`,
+      {
+        params: { rideId: props.ride._id, otp: otp },
       },
-    })
-    navigate('/captain-map')
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("captain-token")}`,
+        },
+      }
+    );
 
-    if(response.status === 200){
-      props.setRidePopUp(false)
-      props.setAcceptRide(false)
+    if (response.status === 200) {
+      navigate("/captain-map", { state: { ride: props.ride } });
+      props.setRidePopUp(false);
+      props.setAcceptRide(false);
     }
   };
   return (
@@ -30,7 +32,6 @@ const AcceptRide = (props) => {
         <i
           onClick={() => {
             props.setAcceptRide(false);
-            
           }}
           className="ri-arrow-down-wide-fill text-3xl "
         ></i>
@@ -45,7 +46,9 @@ const AcceptRide = (props) => {
             src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
             alt=""
           />
-          <h3 className="text-xl font-medium capitalize">{props.ride?.user.fullname.firstname}</h3>
+          <h3 className="text-xl font-medium capitalize">
+            {props.ride?.user.fullname.firstname}
+          </h3>
         </div>
         <h3 className="text-gray-600 text-lg font-medium">1.1km</h3>
       </div>
@@ -55,18 +58,13 @@ const AcceptRide = (props) => {
           <div className="flex items-center gap-6 border-b-2 py-2 ">
             <i className="ri-map-pin-range-line text-xl"></i>
             <div>
-            
-              <p className="text-lg text-gray-600">
-                {" "}
-                {props.ride?.pickup}
-              </p>
+              <p className="text-lg text-gray-600"> {props.ride?.pickup}</p>
             </div>
           </div>
           <h2 className="text-2xl underline mt-2">Drop location</h2>
           <div className="flex items-center gap-6 border-b-2 py-2">
             <i className="ri-map-pin-time-fill text-xl"></i>
             <div>
-             
               <p className="text-lg text-gray-600">
                 {" "}
                 {props.ride?.destination}
@@ -83,9 +81,7 @@ const AcceptRide = (props) => {
         </div>
         <div className="w-full gap-3 text-xl ">
           <form
-            onSubmit={
-              submitHandler
-            }
+            onSubmit={submitHandler}
             className="flex justify-center flex-col"
           >
             <input
@@ -97,10 +93,7 @@ const AcceptRide = (props) => {
               placeholder="Enter OTP "
               className="px-4 mb-2 bg-gray-100 p-2"
             />
-            <button 
-              
-              className=" bg-green-500 text-white p-2 rounded-md text-center"
-            >
+            <button className=" bg-green-500 text-white p-2 rounded-md text-center">
               Confirm
             </button>
           </form>

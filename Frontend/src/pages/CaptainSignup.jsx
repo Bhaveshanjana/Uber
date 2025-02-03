@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {CaptainDataContext} from "../context/CaptainConetxt";
+import { CaptainDataContext } from "../context/CaptainConetxt";
 import axios from "axios";
 
 const captainSignup = () => {
@@ -10,7 +10,7 @@ const captainSignup = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
- 
+
   const [vehicleColor, setVehicleColor] = useState("");
   const [vehiclePlate, setVehiclePlate] = useState("");
   const [vehicleType, setVehicleType] = useState("");
@@ -27,12 +27,12 @@ const captainSignup = () => {
         firstname: firstName,
         lastname: lastName,
       },
-      vehicle:{
+      vehicle: {
         color: vehicleColor,
         plate: vehiclePlate,
         vehicleType: vehicleType,
-        capacity: vehicleCapacity
-      }
+        capacity: vehicleCapacity,
+      },
     };
     try {
       const response = await axios.post(
@@ -43,8 +43,8 @@ const captainSignup = () => {
       if (response.status === 201) {
         const data = response.data;
         setCaptain(data.captain);
-       localStorage.setItem('token', data.token)
-        navigate('/captain-home');
+        localStorage.setItem("token", data.token);
+        navigate("/captain-home");
       }
     } catch (error) {
       console.log(error);
@@ -117,7 +117,7 @@ const captainSignup = () => {
             }}
             className="py-3 w-full bg-[#eeeeee] text-black rounded-md placeholder:text-black p-2"
           />
-           <h1 className="font-medium text-base">Vehical information</h1>
+          <h1 className="font-medium text-base">Vehical information</h1>
           <div className="flex gap-4">
             <input
               required
@@ -159,11 +159,14 @@ const captainSignup = () => {
               placeholder="vehicleType"
               onChange={(e) => {
                 setVehicleType(e.target.value);
-              }}>
-            <option value="" disabled>Select vehicle type</option>
-            <option value="car">Car</option>
-            <option value="auto">Auto</option>
-            <option value="bike">bike</option>
+              }}
+            >
+              <option value="" disabled>
+                Select vehicle type
+              </option>
+              <option value="car">Car</option>
+              <option value="auto">Auto</option>
+              <option value="bike">bike</option>
             </select>
           </div>
           <div className="mx-8">

@@ -1,9 +1,8 @@
-import React, {useContext}from "react";
-import {CaptainDataContext} from '../context/CaptainConetxt'
+import React, { useContext } from "react";
+import { CaptainDataContext } from "../context/CaptainConetxt";
 
 const CaptainDetails = () => {
-
-  const {captain} = useContext(CaptainDataContext);
+  const { captain } = useContext(CaptainDataContext);
   return (
     <div>
       <div className="h-2/5 p-3">
@@ -14,7 +13,9 @@ const CaptainDetails = () => {
               src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
               alt=""
             />
-            <h2 className="text-2xl font-medium capitalize">{captain.fullname.firstname + " "+ captain.fullname.lastname}</h2>
+            <h2 className="text-2xl font-medium capitalize">
+              {captain.fullname.firstname + " " + captain.fullname.lastname}
+            </h2>
           </div>
           <div className="flex flex-col items-center">
             <h3 className="text-2xl font-medium">₹290</h3>

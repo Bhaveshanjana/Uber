@@ -53,4 +53,10 @@ router.get(
     .withMessage("Invaild otp"),
   rideController.startRide
 );
+
+router.post('/end-ride',
+  authMiddleware.authCaptain,
+  body('rideId').isMongoId().withMessage('Invaild ride Id'),
+  rideController.endRide
+)
 module.exports = router;
